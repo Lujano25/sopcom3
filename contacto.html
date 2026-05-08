@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+        <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KDRGVSX5');</script>
+<!-- End Google Tag Manager -->
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | SOP&COM</title>
+    <link rel="stylesheet" href="css/styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="logo/logo.png">
+    
+</head>
+<body class="pagina-contacto">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDRGVSX5"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+       <header style="background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+
+
+             <div class="logo">
+                    <a href="index.html">
+                        <img src="logo/logo.png" alt="Sopcom Logo">
+                    </a>
+            </div>
+
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+        
+            <nav class="nav-links" id="nav-menu">
+                    <a href="index.html" style="margin: 0 15px; text-decoration: none; color: #333; font-weight: bold;">Inicio</a>
+                    <a href="servicios.html" style="margin: 0 15px; text-decoration: none; color: #333; font-weight: bold;">Servicios</a>
+                    <a href="nosotros.html" style="margin: 0 15px; text-decoration: none; color: #333; font-weight: bold;">Nosotros</a>
+                    <a href="contacto.html" class="activo" style="margin: 0 15px; text-decoration: none; color: #333; font-weight: bold;">Contacto</a>
+            </nav>
+            
+    </header>
+
+    <div style="height: 80px; width: 100%;"></div>
+
+    
+    <section class="contacto-hero">
+        <div class="contacto-container">
+            
+            <div class="info-contacto reveal">
+                <h2>Hablemos de tu <br><span class="texto-azul">Próximo Proyecto</span></h2>
+                <p>Estamos listos para diseñar la estrategia tecnológica que tu empresa necesita. Escríbenos y un consultor experto te responderá en breve.</p>
+                
+                <div class="info-items">
+                    <div class="item">
+                        <div class="icono-box"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4>Ubicación</h4>
+                            <p>Monterrey, Nuevo León, México</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icono-box"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>Correo</h4>
+                            <p>informes@sopcom.com.mx</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icono-box"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h4>Teléfono</h4>
+                            <p>+52 81 2030 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-wrapper reveal">
+ <form id="formulario-contacto">
+        <h3>Envíanos un mensaje</h3>
+
+        <div class="input-group">
+            <input type="text" name="nombre" required>
+            <label>Nombre Completo</label>
+        </div>
+
+        <div class="input-group">
+            <input type="text" name="empresa" required>
+            <label>Empresa</label>
+        </div>
+
+        <div class="input-group">
+            <input type="email" name="correo" required>
+            <label>Correo Empresarial</label>
+        </div>
+
+        <div class="input-group">
+            <textarea name="mensaje" required></textarea>
+            <label>¿Cómo podemos ayudarte?</label>
+        </div>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <div class="g-recaptcha" data-sitekey="6Lc-m2AsAAAAAE0hMHSl_F69JdfmjhV5On6LQYr3" data-theme="dark" style="display: inline-block;"></div>
+        </div>
+
+        <div style="margin-top: 15px; margin-bottom: 25px; text-align: left; font-size: 12px; color: #b0b0b0; line-height: 1.5;">
+             SOP&COM protege tus datos personales. Al enviar este formulario, aceptas nuestro 
+             <a href="aviso-privacidad.html" target="_blank" style="color: #49C2F2; text-decoration: underline;">Aviso de Privacidad</a>.
+        </div>
+
+        <button type="submit" class="btn-enviar">
+            Enviar Mensaje <i class="fas fa-paper-plane"></i>
+        </button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const formulario = document.getElementById('formulario-contacto');
+
+    if (formulario) {
+        formulario.addEventListener('submit', function(e) {
+            e.preventDefault(); // Detiene la recarga de la página
+
+            // 1. Mostrar alerta de "Cargando..."
+            Swal.fire({
+                title: 'Enviando...',
+                text: 'Procesando tu solicitud',
+                icon: 'info',
+                background: '#1a1a1a', color: '#fff',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                willOpen: () => { Swal.showLoading() }
+            });
+
+            // 2. Recolectar los datos del formulario y convertirlos a un objeto
+            const formData = new FormData(this);
+            const datosDelCliente = Object.fromEntries(formData.entries());
+
+            // 3. Enviar datos al NUEVO BACKEND en Node.js
+            fetch('http://localhost:3000/api/contacto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Le decimos que enviamos JSON
+                },
+                body: JSON.stringify(datosDelCliente) // Convertimos el objeto a texto JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Si el servidor responde "Éxito" (como lo programamos)
+                if(data.estatus === 'Éxito') {
+                    Swal.fire({
+                        title: '¡Enviado!',
+                        text: data.mensaje,
+                        icon: 'success',
+                        background: '#1a1a1a', color: '#fff',
+                        confirmButtonColor: '#49C2F2'
+                    });
+                    formulario.reset(); // Limpia los campos
+                    if(window.grecaptcha) grecaptcha.reset(); // Limpia el captcha
+                } else {
+                    Swal.fire({
+                        title: 'Atención',
+                        text: 'Hubo un problema al procesar tu solicitud.',
+                        icon: 'warning',
+                        background: '#1a1a1a', color: '#fff',
+                        confirmButtonColor: '#d33'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error de Conexión',
+                    text: 'No pudimos conectar con el servidor. Intenta de nuevo.',
+                    icon: 'error',
+                    background: '#1a1a1a', color: '#fff'
+                });
+            });
+        });
+    }
+});
+</script>
+
+            
+
+<a href="https://wa.me/528120302024" class="btn-wsp" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" class="whatsapp-ico">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+</a>
+
+<style>
+    .btn-wsp {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        /* Usamos flexbox para un centrado perfecto del icono */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        /* Posición: Arriba del botón de subir */
+        bottom: 95px; 
+        right: 25px;
+        
+        background: #25d366; /* Verde oficial */
+        border-radius: 50px;
+        box-shadow: 0px 1px 10px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    .btn-wsp:hover {
+        background: #20ba5a;
+        transform: scale(1.1);
+        box-shadow: 0px 5px 15px rgba(0,0,0,0.4);
+    }
+    .whatsapp-ico {
+        fill: white; /* Color del icono blanco */
+        /* Ya no necesitamos márgenes porque usamos flexbox en el padre */
+    }
+</style>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
+</body>
+</html>
