@@ -29,7 +29,7 @@ app.post('/api/contacto', (req, res) => {
     // 1. Configuramos el "cartero" robot con tu servidor de SOPCOM
     const transporter = nodemailer.createTransport({
         host: 'mail.sopcom.com.mx', 
-        port: 465,             
+        port: 587,             
         secure: true,         
         auth: {
             user: 'oscar.lujano@sopcom.com.mx', 
