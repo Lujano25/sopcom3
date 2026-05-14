@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const datosDelCliente = Object.fromEntries(formData.entries());
 
             // 3. Enviar datos al NUEVO BACKEND en Node.js
-            fetch('http://localhost:3000/api/contacto', {
+            fetch('https://sopcom3.onrender.com/api/contacto', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json' // Le decimos que enviamos JSON

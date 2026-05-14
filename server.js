@@ -1,5 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,18 +22,41 @@ app.post('/api/contacto', (req, res) => {
     // Extraemos los datos que nos enviará el frontend
     const { nombre, empresa, correo, mensaje } = req.body;
 
-    // Imprimimos en la consola del servidor para verificar que llegaron
     console.log("🔔 ¡Nuevo prospecto recibido en SOP&COM!");
     console.log(`Nombre: ${nombre}`);
     console.log(`Empresa: ${empresa}`);
-    console.log(`Correo: ${correo}`);
-    console.log(`Mensaje: ${mensaje}`);
-    console.log("-----------------------------------------");
+    
+    // 1. Configuramos el "cartero" robot con tu servidor de SOPCOM
+    const transporter = nodemailer.createTransport({
+        host: 'mail.sopcom.com.mx', 
+        port: 465,                  
+        secure: true,               
+        auth: {
+            user: 'oscar.lujano@sopcom.com.mx', 
+            pass: process.env.EMAIL_PASS // Bóveda secreta activada
+        }
+    });
 
-    // Le respondemos a la página web (o a Postman) que todo salió bien
-    res.json({ 
-        estatus: 'Éxito', 
-        mensaje: 'Tu mensaje ha sido recibido. Un consultor se pondrá en contacto pronto.' 
+    // 2. Armamos el diseño del correo que te va a llegar
+    const mailOptions = {
+        from: 'oscar.lujano@sopcom.com.mx', 
+        to: 'oscar.lujano@sopcom.com.mx',   
+        subject: `🚨 Nuevo prospecto SOP&COM: ${empresa}`,
+        text: `¡Hola Óscar!\n\nTienes un nuevo prospecto interesado en SOP&COM.\n\nDatos del cliente:\n- Nombre: ${nombre}\n- Empresa: ${empresa}\n- Correo: ${correo}\n\nMensaje:\n${mensaje}`
+    };
+
+    // 3. Disparamos el correo
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log("❌ Error al enviar la alerta por correo: ", error);
+            return res.status(500).json({ estatus: 'Error', mensaje: 'Fallo al enviar correo' });
+        } 
+        
+        console.log("✅ Alerta por correo enviada exitosamente!");
+        res.json({
+            estatus: 'Éxito',
+            mensaje: 'Tu mensaje ha sido recibido. Un consultor se pondrá en contacto pronto.'
+        });
     });
 });
 
