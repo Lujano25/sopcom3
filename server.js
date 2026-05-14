@@ -28,14 +28,17 @@ app.post('/api/contacto', (req, res) => {
     console.log(`Nombre: ${nombre}`);
     console.log(`Empresa: ${empresa}`);
     
-    // 1. Configuramos el "cartero" robot con tu servidor de SOPCOM
+   // 1. Configuramos el "cartero" robot con tu servidor de SOPCOM
     const transporter = nodemailer.createTransport({
         host: 'mail.sopcom.com.mx', 
-        port: 465,                  
-        secure: true,               
+        port: 587,             // Cambiamos el puerto al 587
+        secure: false,         // Debe ser false cuando usamos el puerto 587
         auth: {
             user: 'oscar.lujano@sopcom.com.mx', 
-            pass: process.env.EMAIL_PASS // ¡Ponla solo para esta prueba local!
+            pass: process.env.EMAIL_PASS
+        },
+        tls: {
+            rejectUnauthorized: false // Evita bloqueos por certificados SSL del hosting
         }
     });
 
