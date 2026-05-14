@@ -31,8 +31,8 @@ app.post('/api/contacto', (req, res) => {
    // 1. Configuramos el "cartero" robot con tu servidor de SOPCOM
     const transporter = nodemailer.createTransport({
         host: 'mail.sopcom.com.mx', 
-        port: 587,             // Cambiamos el puerto al 587
-        secure: false,         // Debe ser false cuando usamos el puerto 587
+        port: 2525,             // Cambiamos el puerto al 2525
+        secure: false,         // Debe ser false cuando usamos el puerto 2525
         auth: {
             user: 'oscar.lujano@sopcom.com.mx', 
             pass: process.env.EMAIL_PASS
