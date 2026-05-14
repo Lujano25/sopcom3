@@ -1,13 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors()); 
 app.use(express.json()); 
+const nodemailer = require('nodemailer');
 
 // Ruta GET: Para comprobar que funciona la raíz
 app.get('/', (req, res) => {
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
     });
 });
 
+// --- NUEVA RUTA POST: Para recibir los datos del contacto ---
 // --- NUEVA RUTA POST: Para recibir los datos del contacto ---
 app.post('/api/contacto', (req, res) => {
     // Extraemos los datos que nos enviará el frontend
@@ -33,14 +35,14 @@ app.post('/api/contacto', (req, res) => {
         secure: true,               
         auth: {
             user: 'oscar.lujano@sopcom.com.mx', 
-            pass: process.env.EMAIL_PASS // Bóveda secreta activada
+            pass: process.env.EMAIL_PASS // ¡Ponla solo para esta prueba local!
         }
     });
 
     // 2. Armamos el diseño del correo que te va a llegar
     const mailOptions = {
-        from: 'oscar.lujano@sopcom.com.mx', 
-        to: 'oscar.lujano@sopcom.com.mx',   
+        from: 'oscar.lujano@sopcom.com.mx', // Quién lo envía (tu robot)
+        to: 'oscar.lujano@sopcom.com.mx',   // A quién le llega (tú mismo para la alerta)
         subject: `🚨 Nuevo prospecto SOP&COM: ${empresa}`,
         text: `¡Hola Óscar!\n\nTienes un nuevo prospecto interesado en SOP&COM.\n\nDatos del cliente:\n- Nombre: ${nombre}\n- Empresa: ${empresa}\n- Correo: ${correo}\n\nMensaje:\n${mensaje}`
     };
@@ -49,10 +51,12 @@ app.post('/api/contacto', (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.log("❌ Error al enviar la alerta por correo: ", error);
+            // Le decimos a Postman que hubo un error
             return res.status(500).json({ estatus: 'Error', mensaje: 'Fallo al enviar correo' });
         } 
         
         console.log("✅ Alerta por correo enviada exitosamente!");
+        // Si todo sale bien, le respondemos el "200 OK" a la página web
         res.json({
             estatus: 'Éxito',
             mensaje: 'Tu mensaje ha sido recibido. Un consultor se pondrá en contacto pronto.'
@@ -63,3 +67,16 @@ app.post('/api/contacto', (req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Servidor de SOP&COM corriendo exitosamente en http://localhost:${PORT}`);
 });
+
+
+
+// 1. Configuramos el "cartero" robot con tu servidor de SOPCOM
+    const transporter = nodemailer.createTransport({
+        host: 'mail.sopcom.com.mx', // Normalmente es mail.tudominio.com
+        port: 465,                  // Puerto seguro estándar para SMTP
+        secure: true,               // true para el puerto 465
+        auth: {
+            user: 'oscar.lujano@sopcom.com.mx', // Tu correo electrónico de SOPCOM
+            pass: '*sopcom2025*'              // Tu contraseña de correo electrónico
+        }
+    });
